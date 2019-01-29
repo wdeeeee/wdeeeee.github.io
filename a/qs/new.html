@@ -1,0 +1,204 @@
+<!DOCTYPE html><html><head><script>if(navigator.userAgent&&navigator.userAgent.indexOf("MicroMessenger")>=0&&navigator.userAgent.indexOf("WindowsWechat")<0&&navigator.userAgent.indexOf("wechatdevtools")<0){}else{/*location.href="https://www.baidu.com"*/}</script><meta charset="utf-8"><meta name="renderer" content="webkit"><meta name="format-detection" content="telephone=no"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><title>开始出题</title><link rel="stylesheet" type="text/css" href="//os.tvurl.cn/min_m.css?v=1.0.0">
+<style>
+.main { position:absolute;width:100%;height:100%;background:#F55;background-size:cover; }
+.progress { position:relative;width:13rem;height:1.3rem;margin:0.8rem auto;overflow:hidden; }
+.progress b { display:block;position:absolute;left:0;top:0.55rem;z-index:0;width:15rem;height:0.2rem;background:#000 }
+.progress ul { position:absolute;left:0;top:0;z-index:1;width:13.5rem }
+.progress ul li { float:left;display:block;width:1rem;height:1rem;line-height:1rem;text-align:center;margin:0.15rem;border-radius:50%;background:#FFF }
+.progress ul li.mark { background:#000;color:#FFF }
+.tips { width:11.5rem;height:1.4rem;padding:0.25rem 0.2rem 0.2rem;background:rgba(255,255,255,0.8);text-align:center;line-height:0.7rem;font-size:0.5rem;border-radius:1.05rem;margin:0 auto }
+.question { position:relative;width:11rem;padding:0.7rem;background:#FFF;border:2px solid #000;border-radius:0.3rem;margin:1rem auto;box-shadow:0 0 10px rgba(0,0,0,0.5) }
+.question h3 { height:2rem;font-weight:normal;font-size:0.55rem }
+.question .change { position:absolute;right:0.5rem;top:0.5rem;width:3rem;height:1rem;border-radius:0.5rem;line-height:1rem;text-align:center;background:#FE5;border:2px solid #000;color:#333 }
+.question .option li { padding:0.5rem;background:#EEE;margin-bottom:0.5rem;border-radius:0.2rem;line-height:0.8rem }
+.question .option li i { display:inline-block;width:0.6rem;height:0.6rem;background:#CCC;position:relative;top:0.11rem }
+.question .option li.selected i { background:#000 }
+.next { display:block;width:10rem;height:1.4rem;border-radius:0.7rem;line-height:1.4rem;text-align:center;margin:0.5rem auto;background:#FFF;border:2px solid #000;color:#333 }
+.redpack-box { position:fixed;width:100%;height:100%;background:rgba(255,255,255,0.8);z-index:11;display:none; }
+.redpack { width:12rem;height:15.3rem;background:rgba(255,85,85,0.95);margin:3rem auto;border-radius:0.3rem }
+.redpack h5 { height:1.7rem;line-height:2rem;text-align:center;font-weight:normal;font-size:0.6rem }
+.redpack ul>li { position:relative;width:10rem;margin:0.5rem auto;min-height:1.6rem;line-height:1.6rem;background:#FFF;border-radius:0.2rem;overflow:hidden; }
+.redpack ul>li input { display:block;position:absolute;left:0;right:0;width:8.8rem;height:1.6rem;border:none;z-index:0;text-align:right;padding-right:1.2rem }
+.redpack ul>li i,.redpack ul>li b { display:block;position:absolute;left:0.4rem;top:0;font-weight:normal;font-style:normal;z-index:1;pointer-events:none; }
+.redpack ul>li b { left:auto;right:0.4rem }
+.redpack .pay { display:block;width:5rem;height:1.4rem;line-height:1.4rem;border-radius:0.7rem;text-align:center;color:#333;background:#FE5;border:2px solid #000;margin:0.3rem auto }
+.redpack ul>li.select { height:4.2rem }
+.redpack ul>li.select b { display:inline;font-weight:bold;position:static;color:red }
+.redpack ul>li.select span { display:block;height:1.6rem;text-indent:0.4rem }
+.redpack ul>li.select ol { width:9rem;height:1rem;background:#FE5;margin:0 auto }
+.redpack ul>li.select ol li { float:left;width:1.5rem;height:1rem;line-height:1rem;text-align:center;border:1px solid #000;border-left:none;box-sizing:border-box; }
+.redpack ul>li.select ol li:first-child { border-left:1px solid #000 }
+.redpack ul>li.select ol li.selected { background:#000;color:#FFF }
+.redpack .fee i,.redpack .fee span { display:block;line-height:0.8rem;text-align:center;font-style:normal; }
+</style>
+</head><body class="cer" tj="65337483" url="tvurl.cn">
+
+<div class="main">
+	<div class="progress">
+		<b></b>
+		<ul><li>1</li><li>2</li><li>3</li><li>4</li><li>5</li><li>6</li><li>7</li><li>8</li><li>9</li><li>10</li></ul>
+	</div>
+	<div class="tips">请查看问题，选择两个答案中最适合你的一个<br>如果感觉题目不适合自己，可点击换一题</div>
+	<div class="question">
+		<h3 id="title"></h3>
+		<ul class="option" id="option" v="">
+			<li v="0"><i></i> <span></span></li>
+			<li v="1"><i></i> <span></span></li>
+		</ul>
+		<a class="change" id="change">换一题</a>
+	</div>
+	<a class="next" id="next">下一题</a>
+</div>
+
+<div class="redpack-box">
+	<div class="redpack">
+		<h5>设置红包</h5>
+		<form id="redpack">
+			<ul>
+				<li><input type="number" name="money" vl_="红包金额" vl_require="true" vl_regex="(^[1-9]\d{0,3}$)|(^\d{1,4}\.\d\d?$)" maxlength="7" preventDefault="false"><i>红包金额</i><b>元</b></li>
+				<li><input type="number" name="num" vl_="红包个数" vl_require="true" vl_regex="^[1-9]\d{0,2}$" maxlength="3" preventDefault="false"><i>红包个数</i><b>个</b></li>
+				<li class="select oknum"><span>答对几道题可以领取红包？</span><ol><li v="5">5</li><li v="6">6</li><li v="7">7</li><li v="8" class="selected">8</li><li v="9">9</li><li v="10">10</li></ol><span>注：答对 <b>8</b> 道题者将拼手气拆开红包</span></li>
+			</ul>
+			<div class="fee"><span>付款金额：<b>￥ -</b></span><i>含2%平台服务费(最低0.1元)</i></div>
+			<a class="pay" id="do">塞钱进红包</a>
+			<input type="hidden" name="oknum" value="8">
+			<input type="hidden" name="qs">
+		</form>
+	</div>
+</div>
+
+
+
+<script src="//os.tvurl.cn/min_m.js?v=1.0.0"></script><script>
+$(function(){
+	var qs,qsNos,qsNoNow,qsOk = {};
+	$.myLoading(true);
+	$.loadScript('http://' + $('body').attr('url') + '/0/a.qs.js?action=new&code=' + $.POST['code'] + '&t=' + $.now(),function(){
+		$.myLoading();
+
+		qs = JSON.parse(decodeURIComponent(_qs));
+		// 初始化
+		initQs();
+
+		// 换一题
+		$('#change').tap(function(){ nextQs(); })
+		// 选答案
+		$('#option li').tap(function(){
+			$('#option li.selected').removeClass('selected');
+			$(this).addClass('selected');
+		})
+		// 下一题
+		$('#next').tap(function(){
+			if(!$('#option li.selected').length){ $('body').myBubble('请先选择适合你的答案');return false; }
+			qsOk[qsNos[qsNoNow]] = $('#option li.selected').attr('v');
+			var qsCount = Object.keys(qsOk).length;
+			$('.progress ul li:lt(' + qsCount + ')').addClass('mark');
+			if(qsCount < 10){
+				if(qsCount > 8){ $('#next').html('设置红包') }
+				nextQs();
+			}else{
+				$('#redpack [name="qs"]').val(JSON.stringify(qsOk));
+				$('.redpack-box').show();
+			}
+		})
+
+		// 选择题数目
+		$('#redpack .oknum ol li').tap(function(){
+			if($('#redpack [name="money"]').is(":focus")){ $('#redpack [name="money"]').blur(); }
+			if($('#redpack [name="num"]').is(":focus")){ $('#redpack [name="num"]').blur(); }
+			$('#redpack .oknum ol li.selected').removeClass('selected');
+			$(this).addClass('selected');
+			$('.redpack ul>li.select b').html($(this).attr('v'));
+			$('#redpack [name="oknum"]').val($(this).attr('v'))
+		})
+		// 设置红包
+		$('#do').tap(function(){
+			if(!$('#redpack').formValid()){ return false; }
+			if($('#redpack [name="money"]').is(":focus")){ $('#redpack [name="money"]').blur(); }
+			if($('#redpack [name="num"]').is(":focus")){ $('#redpack [name="num"]').blur(); }
+			if(!$('#redpack .oknum ol li.selected').length){ $('body').myBubble('请设置可领答题个数');return false; }
+
+			if(parseFloat($('#redpack [name="money"]').val()) / parseInt($('#redpack [name="num"]').val()) < 0.01){ $('body').myBubble('人均红包不能小于1分');return false; }
+
+			// 支付
+			$.myLoading(true);
+			$.loadScript('http://' + $('body').attr('url') + '/0/a.qs.js?action=pay&code=' + $.POST['code'] + '&t=' + $.now() + '&' + $('#redpack').serialize(),function(){
+				$.myLoading();
+				if(rtPay == 0){
+					var data = JSON.parse(decodeURIComponent(dataPay));
+					var wepayData = {
+						appId : data.appId,
+						nonceStr : data.nonceStr,
+						'package' : data['package'],
+						signType : 'MD5',
+						timeStamp : data.timeStamp.toString(),
+						paySign : data.paySign
+					};
+					wepayJsApiCall(wepayData);
+				}else{
+					$.myBubble('红包生成失败！<br>当前发红包的人过多，请稍后再试~');
+				}
+			})
+		})
+		// 数据填写完计算
+		$('#redpack [name="money"]').blur(function(){
+			if(new RegExp($(this).attr('vl_regex')).test($(this).val())){
+				var serviceFee = parseFloat($(this).val()) * 0.02;
+				serviceFee = serviceFee < 0.1 ? 0.1 : serviceFee;
+				$('#redpack .fee b').html('￥ ' + (parseFloat($(this).val()) + serviceFee).toFixed(2))
+			}else{
+				$('#redpack .fee b').html('￥ -');
+			}
+		})
+	});
+
+	function initQs(){ qsNos = Object.keys(qs).sort(function(){return Math.random()>0.5?-1:1}); qsNoNow = -1;nextQs(); }
+	function nextQs(){
+
+		// 是否已满10题
+		if(Object.keys(qsOk).length >= 10){ return false; }
+
+		++ qsNoNow;
+		if(!qsNos[qsNoNow]){ initQs();return false; }
+
+		if(qsOk[qsNos[qsNoNow]]){	// 如果已设置此问题
+			nextQs();
+		}else{
+			$('#title').html(qs[qsNos[qsNoNow]][0]);
+			$('#option li[v="0"] span').html(qs[qsNos[qsNoNow]][1][0]);
+			$('#option li[v="1"] span').html(qs[qsNos[qsNoNow]][1][1]);
+			$('#option li.selected').removeClass('selected');
+		}
+	}
+})
+
+// 调起微信支付
+function wepayJsApiCall(data){
+	WeixinJSBridge.invoke('getBrandWCPayRequest',data,function(res){
+		switch(res.err_msg){
+			case 'get_brand_wcpay_request:ok':
+				$('body').myBubble('<span class="pay-waiting-text">正在确认支付结果，请稍候(5s)...</span>',10000);
+				var countdown = 5;
+				var interval = setInterval(function(){
+					-- countdown;
+					if(countdown > 0){
+						$('.pay-waiting-text').html('正在确认支付结果，请稍候(' + countdown + 's)...');
+					}else{
+						clearInterval(interval);
+						$.myAlert({text:'付款成功'})
+						//location.href = '';
+					}
+				},1000);
+			break;
+			case 'get_brand_wcpay_request:cancel':
+				$.myAlert({text:'您取消了支付！',time:1500});
+			break;
+			case 'get_brand_wcpay_request:fail':
+				$.myAlert({text:'支付失败！请重试！'});
+			break;
+			default:
+				$.myAlert({text:'支付出错！请稍后重试。'});
+		}
+	});
+}
+</script><script>document.addEventListener('WeixinJSBridgeReady',function onBridgeReady(){WeixinJSBridge.call('hideOptionMenu')});</script></body></html>
